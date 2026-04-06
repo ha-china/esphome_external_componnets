@@ -85,7 +85,7 @@ LD2451_SET_BAUD_RATE_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_BAUD_RATE): cv.enum(LD2451_BAUD_RATE_OPTIONS)
     }
 )
-@automation.register_action("ld2451.set_baud_rate", LD2451SetBaudRateAction, LD2451_SET_BAUD_RATE_ACTION_SCHEMA)
+@automation.register_action("ld2451.set_baud_rate", LD2451SetBaudRateAction, LD2451_SET_BAUD_RATE_ACTION_SCHEMA, synchronous=True)
 async def ld2451_set_baud_rate_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -100,7 +100,7 @@ LD2451_ENABLE_CONFIG_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(LD2451Component),
     }
 )
-@automation.register_action("ld2451.enable_config", LD2451EnableConfigAction, LD2451_ENABLE_CONFIG_ACTION_SCHEMA)
+@automation.register_action("ld2451.enable_config", LD2451EnableConfigAction, LD2451_ENABLE_CONFIG_ACTION_SCHEMA, synchronous=True)
 async def ld2451_enable_config_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -111,7 +111,7 @@ LD2451_DISABLE_CONFIG_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(LD2451Component),
     }
 )
-@automation.register_action("ld2451.disable_config", LD2451DisableConfigAction, LD2451_DISABLE_CONFIG_ACTION_SCHEMA)
+@automation.register_action("ld2451.disable_config", LD2451DisableConfigAction, LD2451_DISABLE_CONFIG_ACTION_SCHEMA, synchronous=True)
 async def ld2451_disable_config_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -122,7 +122,7 @@ LD2451_RESET_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(LD2451Component),
     }
 )
-@automation.register_action("ld2451.reset", LD2451ResetAction, LD2451_RESET_ACTION_SCHEMA)
+@automation.register_action("ld2451.reset", LD2451ResetAction, LD2451_RESET_ACTION_SCHEMA, synchronous=True)
 async def ld2451_reset_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -133,7 +133,7 @@ LD2451_RESTART_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(LD2451Component),
     }
 )
-@automation.register_action("ld2451.restart", LD2451RestartAction, LD2451_RESTART_ACTION_SCHEMA)
+@automation.register_action("ld2451.restart", LD2451RestartAction, LD2451_RESTART_ACTION_SCHEMA, synchronous=True)
 async def ld2451_restart_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -146,7 +146,7 @@ LD2451_SET_SENSITIVITY_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_SIGNAL_THRESHOLD): cv.templatable(cv.int_range(0, 8)),
     }
 )
-@automation.register_action("ld2451.set_sensitivity", LD2451SetSensitivityAction, LD2451_SET_SENSITIVITY_ACTION_SCHEMA)
+@automation.register_action("ld2451.set_sensitivity", LD2451SetSensitivityAction, LD2451_SET_SENSITIVITY_ACTION_SCHEMA, synchronous=True)
 async def ld2451_set_sensitivity_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -169,7 +169,7 @@ LD2451_SET_TARGET_DETECT_CONFIG_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_NO_TARGET_DELAY): cv.templatable(cv.uint8_t),
     }
 )
-@automation.register_action("ld2451.set_target_detect_config", LD2451SetTargetDetectConfigAction, LD2451_SET_TARGET_DETECT_CONFIG_ACTION_SCHEMA)
+@automation.register_action("ld2451.set_target_detect_config", LD2451SetTargetDetectConfigAction, LD2451_SET_TARGET_DETECT_CONFIG_ACTION_SCHEMA, synchronous=True)
 async def ld2451_set_target_detect_config_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)

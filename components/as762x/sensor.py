@@ -301,7 +301,7 @@ AS762X_RESETACTION_SCHEMA = automation.maybe_simple_id(
 )
 
 
-@automation.register_action("as762x.reset", AS762XResetAction, AS762X_RESETACTION_SCHEMA)
+@automation.register_action("as762x.reset", AS762XResetAction, AS762X_RESETACTION_SCHEMA, synchronous=True)
 async def as762x_reset_action_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)

@@ -58,7 +58,7 @@ GD60914_RESETACTION_SCHEMA  = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(GD60914Component),
     }
 )
-@automation.register_action("gd60914.reset", GD60914ResetAction, GD60914_RESETACTION_SCHEMA)
+@automation.register_action("gd60914.reset", GD60914ResetAction, GD60914_RESETACTION_SCHEMA, synchronous=True)
 async def gd60914_reset_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -69,7 +69,7 @@ GD60914_CALIBRATE35ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(GD60914Component),
     }
 )
-@automation.register_action("gd60914.calibrate35", GD60914Calibrate35Action, GD60914_CALIBRATE35ACTION_SCHEMA)
+@automation.register_action("gd60914.calibrate35", GD60914Calibrate35Action, GD60914_CALIBRATE35ACTION_SCHEMA, synchronous=True)
 async def gd60914_calibrate35_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -80,7 +80,7 @@ GD60914_CALIBRATE42ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(GD60914Component),
     }
 )
-@automation.register_action("gd60914.calibrate42", GD60914Calibrate42Action, GD60914_CALIBRATE42ACTION_SCHEMA)
+@automation.register_action("gd60914.calibrate42", GD60914Calibrate42Action, GD60914_CALIBRATE42ACTION_SCHEMA, synchronous=True)
 async def gd60914_calibrate42_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)

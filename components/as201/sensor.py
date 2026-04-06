@@ -1,6 +1,6 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
-from esphome.components import sensor, uart
+from esphome.components import sensor
 from esphome.const import (
     CONF_TEMPERATURE, UNIT_CELSIUS, DEVICE_CLASS_TEMPERATURE, CONF_PRESSURE, \
     UNIT_PASCAL, DEVICE_CLASS_ATMOSPHERIC_PRESSURE, CONF_HEIGHT, UNIT_METER,
@@ -148,8 +148,6 @@ CONFIG_SCHEMA = cv.All(
             )
         }
     )
-    .extend(cv.COMPONENT_SCHEMA)
-    .extend(uart.UART_DEVICE_SCHEMA),
 )
 
 async def to_code(config):

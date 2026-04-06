@@ -82,7 +82,7 @@ LD2460_ENABLE_UPLOADACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_UPLOAD): cv.templatable(cv.boolean),
     }
 )
-@automation.register_action("ld2460.enable_upload", LD2460EnableUploadAction, LD2460_ENABLE_UPLOADACTION_SCHEMA)
+@automation.register_action("ld2460.enable_upload", LD2460EnableUploadAction, LD2460_ENABLE_UPLOADACTION_SCHEMA, synchronous=True)
 async def ld2460_enable_upload_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -99,7 +99,7 @@ LD2460_SET_INSTALL_PARAMS_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ANGLE): cv.templatable(cv.positive_float),
     }
 )
-@automation.register_action("ld2460.set_install_params", LD2460SetInstallParamsAction, LD2460_SET_INSTALL_PARAMS_ACTION_SCHEMA)
+@automation.register_action("ld2460.set_install_params", LD2460SetInstallParamsAction, LD2460_SET_INSTALL_PARAMS_ACTION_SCHEMA, synchronous=True)
 async def ld2460_set_install_params_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -116,7 +116,7 @@ LD2460_RESTART_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(LD2460Component),
     }
 )
-@automation.register_action("ld2460.restart", LD2460RestartAction, LD2460_RESTART_ACTION_SCHEMA)
+@automation.register_action("ld2460.restart", LD2460RestartAction, LD2460_RESTART_ACTION_SCHEMA, synchronous=True)
 async def ld2460_restart_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -127,7 +127,7 @@ LD2460_FACTORY_RESET_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(LD2460Component),
     }
 )
-@automation.register_action("ld2460.factory_reset", LD2460FactoryResetAction, LD2460_FACTORY_RESET_ACTION_SCHEMA)
+@automation.register_action("ld2460.factory_reset", LD2460FactoryResetAction, LD2460_FACTORY_RESET_ACTION_SCHEMA, synchronous=True)
 async def ld2460_factory_reset_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -141,7 +141,7 @@ LD2460_SET_DETECT_RANGE_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_DETECT_END_ANGLE): cv.templatable(cv.float_),
     }
 )
-@automation.register_action("ld2460.set_detect_range", LD2460SetDetectRangeAction, LD2460_SET_DETECT_RANGE_ACTION_SCHEMA)
+@automation.register_action("ld2460.set_detect_range", LD2460SetDetectRangeAction, LD2460_SET_DETECT_RANGE_ACTION_SCHEMA, synchronous=True)
 async def ld2460_set_detect_range_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)

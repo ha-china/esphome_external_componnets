@@ -117,7 +117,7 @@ MAX30205_SHUTDOWNACTION_SCHEMA = automation.maybe_simple_id(
 )
 
 
-@automation.register_action("max30205.shutdown", MAX30205ShutdownAction, MAX30205_SHUTDOWNACTION_SCHEMA)
+@automation.register_action("max30205.shutdown", MAX30205ShutdownAction, MAX30205_SHUTDOWNACTION_SCHEMA, synchronous=True)
 async def max30205_shutdown_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -131,7 +131,7 @@ MAX30205_WAKEUPACTION_SCHEMA = automation.maybe_simple_id(
 )
 
 
-@automation.register_action("max30205.wakeup", MAX30205WakeupAction, MAX30205_WAKEUPACTION_SCHEMA)
+@automation.register_action("max30205.wakeup", MAX30205WakeupAction, MAX30205_WAKEUPACTION_SCHEMA, synchronous=True)
 async def max30205_wakeup_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)

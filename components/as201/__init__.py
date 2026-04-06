@@ -45,7 +45,7 @@ AS201_GETDATAONCE_SCHEMA = automation.maybe_simple_id(
     }
 )
 @automation.register_action(
-    "as201.get_data_once", GetDataOnceAction, AS201_GETDATAONCE_SCHEMA
+    "as201.get_data_once", GetDataOnceAction, AS201_GETDATAONCE_SCHEMA, synchronous=True
 )
 async def as201_get_data_once_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID]) # AS201Component
@@ -59,7 +59,7 @@ AS201_CALIBRATE_SCHEMA = automation.maybe_simple_id(
     }
 )
 @automation.register_action(
-    "as201.calibrate", CalibrateAction, AS201_CALIBRATE_SCHEMA
+    "as201.calibrate", CalibrateAction, AS201_CALIBRATE_SCHEMA, synchronous=True
 )
 async def as201_calibrate_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID]) # AS201Component
@@ -73,7 +73,7 @@ AS201_STARTCALIBRATEMAGNETICFIELD_SCHEMA = automation.maybe_simple_id(
     }
 )
 @automation.register_action(
-    "as201.start_calibrate_magnetic_field", StartCalibrateMagneticFieldAction, AS201_STARTCALIBRATEMAGNETICFIELD_SCHEMA
+    "as201.start_calibrate_magnetic_field", StartCalibrateMagneticFieldAction, AS201_STARTCALIBRATEMAGNETICFIELD_SCHEMA, synchronous=True
 )
 async def as201_start_calibrate_magnetic_field_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID]) # AS201Component
@@ -87,7 +87,7 @@ AS201_FINISHCALIBRATEMAGNETICFIELD_SCHEMA = automation.maybe_simple_id(
     }
 )
 @automation.register_action(
-    "as201.finish_calibrate_magnetic_field", FinishCalibrateMagneticFieldAction, AS201_FINISHCALIBRATEMAGNETICFIELD_SCHEMA
+    "as201.finish_calibrate_magnetic_field", FinishCalibrateMagneticFieldAction, AS201_FINISHCALIBRATEMAGNETICFIELD_SCHEMA, synchronous=True
 )
 async def as201_finish_calibrate_magnetic_field_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID]) # AS201Component
@@ -109,7 +109,7 @@ AS201_SETSUBSCRIBEFLAG_SCHEMA = automation.maybe_simple_id(
     }
 )
 @automation.register_action(
-    "as201.set_subscribe_flag", SetSubscribeFlagAction, AS201_SETSUBSCRIBEFLAG_SCHEMA
+    "as201.set_subscribe_flag", SetSubscribeFlagAction, AS201_SETSUBSCRIBEFLAG_SCHEMA, synchronous=True
 )
 async def as201_set_subscribe_flag_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID]) # AS201Component

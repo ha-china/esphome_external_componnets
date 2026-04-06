@@ -64,7 +64,7 @@ LD2413_UPDATE_DOOR_LIMIT_ACTION_SCHEMA = maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(LD2413Component),
     }
 )
-@automation.register_action("ld2413.update_door_limit", LD2413UpdateDoorLimitAction, LD2413_UPDATE_DOOR_LIMIT_ACTION_SCHEMA)
+@automation.register_action("ld2413.update_door_limit", LD2413UpdateDoorLimitAction, LD2413_UPDATE_DOOR_LIMIT_ACTION_SCHEMA, synchronous=True)
 async def ld2413_update_door_limit_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -75,7 +75,7 @@ LD2413_ENABLE_CONFIG_ACTION_SCHEMA = maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(LD2413Component),
     }
 )
-@automation.register_action("ld2413.enable_config", LD2413EnableConfigAction, LD2413_ENABLE_CONFIG_ACTION_SCHEMA)
+@automation.register_action("ld2413.enable_config", LD2413EnableConfigAction, LD2413_ENABLE_CONFIG_ACTION_SCHEMA, synchronous=True)
 async def ld2413_enable_config_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -86,7 +86,7 @@ LD2413_DISABLE_CONFIG_ACTION_SCHEMA = maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(LD2413Component),
     }
 )
-@automation.register_action("ld2413.disable_config", LD2413DisableConfigAction, LD2413_DISABLE_CONFIG_ACTION_SCHEMA)
+@automation.register_action("ld2413.disable_config", LD2413DisableConfigAction, LD2413_DISABLE_CONFIG_ACTION_SCHEMA, synchronous=True)
 async def ld2413_disable_config_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -98,7 +98,7 @@ LD2413_SET_MAX_DISTANCE_ACTION_SCHEMA = maybe_simple_id(
         cv.Required(CONF_MAX_DISTANCE): cv.templatable(cv.positive_int),
     }
 )
-@automation.register_action("ld2413.set_max_distance", LD2413SetMaxDistanceAction, LD2413_SET_MAX_DISTANCE_ACTION_SCHEMA)
+@automation.register_action("ld2413.set_max_distance", LD2413SetMaxDistanceAction, LD2413_SET_MAX_DISTANCE_ACTION_SCHEMA, synchronous=True)
 async def ld2413_set_max_distance_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -114,7 +114,7 @@ LD2413_SET_MIN_DISTANCE_ACTION_SCHEMA = maybe_simple_id(
         cv.Required(CONF_MIN_DISTANCE): cv.templatable(cv.positive_int),
     }
 )
-@automation.register_action("ld2413.set_min_distance", LD2413SetMinDistanceAction, LD2413_SET_MIN_DISTANCE_ACTION_SCHEMA)
+@automation.register_action("ld2413.set_min_distance", LD2413SetMinDistanceAction, LD2413_SET_MIN_DISTANCE_ACTION_SCHEMA, synchronous=True)
 async def ld2413_set_min_distance_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -130,7 +130,7 @@ LD2413_SET_REPORT_INTERVAL_ACTION_SCHEMA = maybe_simple_id(
         cv.Required(CONF_UPDATE_INTERVAL): cv.templatable(cv.positive_time_period_milliseconds),
     }
 )
-@automation.register_action("ld2413.set_report_interval", LD2413SetReportIntervalAction, LD2413_SET_REPORT_INTERVAL_ACTION_SCHEMA)
+@automation.register_action("ld2413.set_report_interval", LD2413SetReportIntervalAction, LD2413_SET_REPORT_INTERVAL_ACTION_SCHEMA, synchronous=True)
 async def ld2413_set_report_interval_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)

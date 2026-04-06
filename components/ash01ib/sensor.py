@@ -50,7 +50,7 @@ ASH01IB_START_MEASUREMENT_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(ASH01IBComponent),
     }
 )
-@automation.register_action("ash01ib.start_measurement", ASH01IBStartMeasurementAction, ASH01IB_START_MEASUREMENT_ACTION_SCHEMA)
+@automation.register_action("ash01ib.start_measurement", ASH01IBStartMeasurementAction, ASH01IB_START_MEASUREMENT_ACTION_SCHEMA, synchronous=True)
 async def ash01ib_start_measurement_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -61,7 +61,7 @@ ASH01IB_STOP_MEASUREMENT_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(ASH01IBComponent),
     }
 )
-@automation.register_action("ash01ib.stop_measurement", ASH01IBStopMeasurementAction, ASH01IB_STOP_MEASUREMENT_ACTION_SCHEMA)
+@automation.register_action("ash01ib.stop_measurement", ASH01IBStopMeasurementAction, ASH01IB_STOP_MEASUREMENT_ACTION_SCHEMA, synchronous=True)
 async def ash01ib_stop_measurement_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -72,7 +72,7 @@ ASH01IB_START_CALIBRATION_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(ASH01IBComponent),
     }
 )
-@automation.register_action("ash01ib.start_calibration", ASH01IBStartCalibrationAction, ASH01IB_START_CALIBRATION_ACTION_SCHEMA)
+@automation.register_action("ash01ib.start_calibration", ASH01IBStartCalibrationAction, ASH01IB_START_CALIBRATION_ACTION_SCHEMA, synchronous=True)
 async def ash01ib_start_calibration_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -83,7 +83,7 @@ ASH01IB_STOP_CALIBRATION_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(ASH01IBComponent),
     }
 )
-@automation.register_action("ash01ib.stop_calibration", ASH01IBStopCalibrationAction, ASH01IB_STOP_CALIBRATION_ACTION_SCHEMA)
+@automation.register_action("ash01ib.stop_calibration", ASH01IBStopCalibrationAction, ASH01IB_STOP_CALIBRATION_ACTION_SCHEMA, synchronous=True)
 async def ash01ib_stop_calibration_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)

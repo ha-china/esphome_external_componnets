@@ -102,7 +102,7 @@ VEML6040_SHUTDOWNACTION_SCHEMA = automation.maybe_simple_id(
 )
 
 
-@automation.register_action("veml6040.shutdown", VEML6040ShutdownAction, VEML6040_SHUTDOWNACTION_SCHEMA)
+@automation.register_action("veml6040.shutdown", VEML6040ShutdownAction, VEML6040_SHUTDOWNACTION_SCHEMA, synchronous=True)
 async def veml6040_shutdown_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -116,7 +116,7 @@ VEML6040_WAKEUPACTION_SCHEMA = automation.maybe_simple_id(
 )
 
 
-@automation.register_action("veml6040.wakeup", VEML6040WakeupAction, VEML6040_WAKEUPACTION_SCHEMA)
+@automation.register_action("veml6040.wakeup", VEML6040WakeupAction, VEML6040_WAKEUPACTION_SCHEMA, synchronous=True)
 async def veml6040_wakeup_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)

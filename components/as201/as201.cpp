@@ -24,6 +24,7 @@ void AS201Component::setup() {
 
 void AS201Component::dump_config() {
   ESP_LOGCONFIG(TAG, "AS201:");
+#ifdef USE_SENSOR
   LOG_SENSOR(" ", "Accel X", this->accel_x_sensor_);
   LOG_SENSOR(" ", "Accel Y", this->accel_y_sensor_);
   LOG_SENSOR(" ", "Accel Z", this->accel_z_sensor_);
@@ -43,6 +44,7 @@ void AS201Component::dump_config() {
   LOG_SENSOR(" ", "Temperature", this->temperature_sensor_);
   LOG_SENSOR(" ", "Pressure", this->pressure_sensor_);
   LOG_SENSOR(" ", "Height", this->height_sensor_);
+#endif
 }
 
 void AS201Component::loop() {

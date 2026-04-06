@@ -216,7 +216,7 @@ MAX30105_RESETACTION_SCHEMA = automation.maybe_simple_id(
 )
 
 
-@automation.register_action("max30105.reset", MAX30105ResetAction, MAX30105_RESETACTION_SCHEMA)
+@automation.register_action("max30105.reset", MAX30105ResetAction, MAX30105_RESETACTION_SCHEMA, synchronous=True)
 async def max30105_reset_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -230,7 +230,7 @@ MAX30105_SHUTDOWNACTION_SCHEMA = automation.maybe_simple_id(
 )
 
 
-@automation.register_action("max30105.shutdown", MAX30105ShutdownAction, MAX30105_SHUTDOWNACTION_SCHEMA)
+@automation.register_action("max30105.shutdown", MAX30105ShutdownAction, MAX30105_SHUTDOWNACTION_SCHEMA, synchronous=True)
 async def max30105_shutdown_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -244,7 +244,7 @@ MAX30105_WAKEUPACTION_SCHEMA = automation.maybe_simple_id(
 )
 
 
-@automation.register_action("max30105.wakeup", MAX30105WakeupAction, MAX30105_WAKEUPACTION_SCHEMA)
+@automation.register_action("max30105.wakeup", MAX30105WakeupAction, MAX30105_WAKEUPACTION_SCHEMA, synchronous=True)
 async def max30105_wakeup_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)
@@ -260,7 +260,7 @@ MAX30105_SETPROXIMITYTHRESHOLDACTION_SCHEMA = automation.maybe_simple_id(
 
 
 @automation.register_action("max30105.set_proximity_threshold", MAX30105SetProximityThresholdAction,
-                            MAX30105_SETPROXIMITYTHRESHOLDACTION_SCHEMA)
+                            MAX30105_SETPROXIMITYTHRESHOLDACTION_SCHEMA, synchronous=True)
 async def max30105_set_proximity_threshold_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -279,7 +279,7 @@ MAX30105_SETMODEACTION_SCHEMA = automation.maybe_simple_id(
 )
 
 
-@automation.register_action("max30105.set_mode", MAX30105SetModeAction, MAX30105_SETMODEACTION_SCHEMA)
+@automation.register_action("max30105.set_mode", MAX30105SetModeAction, MAX30105_SETMODEACTION_SCHEMA, synchronous=True)
 async def max30105_set_mode_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -302,7 +302,7 @@ MAX30105_SETLEDCURRENTACTION_SCHEMA = automation.maybe_simple_id(
 
 
 @automation.register_action("max30105.set_led_current", MAX30105SetLedCurrentAction,
-                            MAX30105_SETLEDCURRENTACTION_SCHEMA)
+                            MAX30105_SETLEDCURRENTACTION_SCHEMA, synchronous=True)
 async def max30105_set_led_current_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -332,7 +332,7 @@ MAX30105_ENABLEINTERRUPTSACTION_SCHEMA = automation.maybe_simple_id(
 
 
 @automation.register_action("max30105.enable_interrupts", MAX30105EnableInterruptsAction,
-                            MAX30105_ENABLEINTERRUPTSACTION_SCHEMA)
+                            MAX30105_ENABLEINTERRUPTSACTION_SCHEMA, synchronous=True)
 async def max30105_enable_interrupts_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -359,7 +359,7 @@ MAX30105_SIMULATEINTERRUPSACTION_SCHEMA = automation.maybe_simple_id(
 
 
 @automation.register_action("max30105.simulate_interrupt", MAX30105SimulateInterruptAction,
-                            MAX30105_SIMULATEINTERRUPSACTION_SCHEMA)
+                            MAX30105_SIMULATEINTERRUPSACTION_SCHEMA, synchronous=True)
 async def max30105_simulate_interrupt_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)

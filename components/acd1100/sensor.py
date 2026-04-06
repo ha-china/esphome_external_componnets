@@ -72,7 +72,7 @@ ACD1100_SETCALIBRATEACTIONMODE_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_MODE): cv.templatable(cv.boolean),
     }
 )
-@automation.register_action("acd1100.set_calibrate_mode", ACD1100SetCalibrateModeAction, ACD1100_SETCALIBRATEACTIONMODE_SCHEMA)
+@automation.register_action("acd1100.set_calibrate_mode", ACD1100SetCalibrateModeAction, ACD1100_SETCALIBRATEACTIONMODE_SCHEMA, synchronous=True)
 async def acd1100_calibrate_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -87,7 +87,7 @@ ACD1100_CALIBRATEACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_BASE): cv.templatable(cv.positive_int),
     }
 )
-@automation.register_action("acd1100.calibrate", ACD1100CalibrateAction, ACD1100_CALIBRATEACTION_SCHEMA)
+@automation.register_action("acd1100.calibrate", ACD1100CalibrateAction, ACD1100_CALIBRATEACTION_SCHEMA, synchronous=True)
 async def acd1100_calibrate_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -102,7 +102,7 @@ ACD1100_RESETACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required(CONF_ID): cv.use_id(ACD1100Component),
     }
 )
-@automation.register_action("acd1100.reset", ACD1100ResetAction, ACD1100_RESETACTION_SCHEMA)
+@automation.register_action("acd1100.reset", ACD1100ResetAction, ACD1100_RESETACTION_SCHEMA, synchronous=True)
 async def acd1100_reset_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     return cg.new_Pvariable(action_id, template_arg, paren)

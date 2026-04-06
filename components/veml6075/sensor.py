@@ -115,7 +115,7 @@ VEML6075_SET_COEFFICIENTS_ACTION_SCHEMA = automation.maybe_simple_id(
         cv.Required("UVB_response"): cv.templatable(cv.float_),
     }
 )
-@automation.register_action("veml6075.set_coefficients", VEML6075SetCoefficientsAction, VEML6075_SET_COEFFICIENTS_ACTION_SCHEMA)
+@automation.register_action("veml6075.set_coefficients", VEML6075SetCoefficientsAction, VEML6075_SET_COEFFICIENTS_ACTION_SCHEMA, synchronous=True)
 async def veml6075_set_coefficients_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)

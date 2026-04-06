@@ -53,7 +53,7 @@ ML307R_SENDATCOMMAND_SCHEMA = automation.maybe_simple_id(
 
 
 @automation.register_action(
-    "ml307r.send_at_command", SendAtCommandAction, ML307R_SENDATCOMMAND_SCHEMA
+    "ml307r.send_at_command", SendAtCommandAction, ML307R_SENDATCOMMAND_SCHEMA, synchronous=True
 )
 async def as201_set_subscribe_flag_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])  # ML307RComponent
@@ -74,7 +74,7 @@ ML307R_PING_SCHEMA = automation.maybe_simple_id(
 
 
 @automation.register_action(
-    "ml307r.ping", PingAction, ML307R_PING_SCHEMA
+    "ml307r.ping", PingAction, ML307R_PING_SCHEMA, synchronous=True
 )
 async def ml307r_ping_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])  # ML307RComponent

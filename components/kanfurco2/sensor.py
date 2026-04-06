@@ -61,7 +61,7 @@ KANFURCO2_CALIBRATEACTION_SCHEMA = maybe_simple_id(
 
 
 @automation.register_action("kanfurco2.toggle_self_calibrate", ToggleSelfCalibrateAction,
-                            KANFURCO2_TOGGLESELFCALIBRATEACTION_SCHEMA)
+                            KANFURCO2_TOGGLESELFCALIBRATEACTION_SCHEMA, synchronous=True)
 async def kanfurco2_toggle_self_calibrate_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
@@ -75,7 +75,7 @@ async def kanfurco2_toggle_self_calibrate_to_code(config, action_id, template_ar
     return var
 
 
-@automation.register_action("kanfurco2.calibrate", CalibrateAction, KANFURCO2_CALIBRATEACTION_SCHEMA)
+@automation.register_action("kanfurco2.calibrate", CalibrateAction, KANFURCO2_CALIBRATEACTION_SCHEMA, synchronous=True)
 async def kanfurco2_calibrate_to_code(config, action_id, template_arg, args):
     paren = await cg.get_variable(config[CONF_ID])
     var = cg.new_Pvariable(action_id, template_arg, paren)
