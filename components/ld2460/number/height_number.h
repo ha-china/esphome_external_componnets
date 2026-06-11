@@ -3,8 +3,7 @@
 #include "esphome/components/number/number.h"
 #include "../ld2460.h"
 
-namespace esphome {
-namespace ld2460 {
+namespace esphome::ld2460 {
 
 class HeightNumber : public number::Number, public Parented<LD2460Component> {
  public:
@@ -14,5 +13,4 @@ class HeightNumber : public number::Number, public Parented<LD2460Component> {
   void control(float value) override;
 };
 
-} // namespace ld2460
-} // namespace esphome
+}  // namespace esphome::ld2460

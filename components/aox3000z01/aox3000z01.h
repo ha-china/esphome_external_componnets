@@ -5,8 +5,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/uart/uart.h"
 
-namespace esphome {
-namespace aox3000z01 {
+namespace esphome::aox3000z01 {
 
 class AOX3000Z01Component: public PollingComponent, public uart::UARTDevice {
  public:
@@ -22,4 +21,4 @@ class AOX3000Z01Component: public PollingComponent, public uart::UARTDevice {
 };
 
 }
-}
+

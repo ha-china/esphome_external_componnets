@@ -7,8 +7,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace ags3870 {
+namespace esphome::ags3870 {
 
 class AGS3870Component : public PollingComponent, public i2c::I2CDevice {
  public:
@@ -35,5 +34,4 @@ template<typename... Ts> class AGS3870CalibrateAction : public Action<Ts...> {
   AGS3870Component *ags3870_;
 };
 
-} // esphome
-} // ags3870
+}  // namespace esphome::ags3870

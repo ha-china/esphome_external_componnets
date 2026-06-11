@@ -1,8 +1,8 @@
 #include "kanfurco2.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace kanfurco2 {
+namespace esphome::kanfurco2 {
+
 static const char *const TAG = "kanfurco2";
 static const uint8_t KANFURCO2_HEAD = 0x11;
 static const uint8_t KANFURCO2_COMMAND_READ = 0x01;
@@ -184,6 +184,5 @@ void KANFURCO2Component::dump_config() {
   LOG_SENSOR("  ", "CO2", this->co2_sensor_);
   this->check_uart_settings(9600);
 }
-}  // namespace kanfurco2
+} // namespace esphome::kanfurco2
 
-}  // namespace esphome

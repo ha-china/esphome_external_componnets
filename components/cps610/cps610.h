@@ -6,8 +6,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace cps610 {
+namespace esphome::cps610 {
 
 class CPS610Component : public PollingComponent, public i2c::I2CDevice {
  public:
@@ -27,4 +26,4 @@ class CPS610Component : public PollingComponent, public i2c::I2CDevice {
 
 
 }
-}
+

@@ -4,8 +4,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace max30205 {
+namespace esphome::max30205 {
 
 static const char *const TAG = "max30205";
 static uint8_t REG_TEMPERATURE = 0x00;  // Temperature register
@@ -234,5 +233,4 @@ float MAX30205Component::read_temperature() {
   return temperature;
 }
 
-}  // namespace max30205
-}  // namespace esphome
+} // namespace esphome::max30205

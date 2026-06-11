@@ -23,8 +23,7 @@
 #define MAX_CONCAT_PARTS 10
 #define MAX_CONCAT_MESSAGES 5
 
-namespace esphome {
-namespace ml307r {
+namespace esphome::ml307r {
 
 // 长短信分段结构
 struct SmsPart {
@@ -166,5 +165,5 @@ template<typename... Ts> class PingAction : public Action<Ts...> {
   ML307RComponent *ml307r_;
 };
 
-}  // namespace ml307r
-}  // namespace esphome
+} // namespace esphome::ml307r
+

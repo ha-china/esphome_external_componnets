@@ -23,8 +23,7 @@
 #include "esphome/components/switch/switch.h"
 #endif
 
-namespace esphome {
-namespace as201 {
+namespace esphome::as201 {
 
 class AS201Component : public Component, public uart::UARTDevice {
 #ifdef USE_TEXT_SENSOR
@@ -183,5 +182,4 @@ template<typename... Ts> class SetSubscribeFlagAction : public Action<Ts...> {
 };
 
 
-} // namespace as201
-} // namespace esphome
+} // namespace esphome::as201

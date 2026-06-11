@@ -2,8 +2,7 @@
 #include <bitset>
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace ags2616 {
+namespace esphome::ags2616 {
 
 static const char *const TAG = "ags2616";
 static const uint8_t REG_VERSION = 0x11;  // 版本寄存器地址
@@ -92,5 +91,5 @@ int AGS2616Component::get_version() {
   return version;
 }
 
-}  // namespace ags2616
-}  // namespace esphome
+} // namespace esphome::ags2616
+

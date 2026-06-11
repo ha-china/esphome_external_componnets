@@ -4,8 +4,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace ash01ib {
+namespace esphome::ash01ib {
 
 const char *const TAG = "ash01ib";
 const uint8_t START_MEASUREMENT_CMD[2] = {0x06, 0x01};  // Start measurement command
@@ -137,4 +136,4 @@ uint32_t ASH01IBComponent::unique_id() {
 }
 
 }
-}
+

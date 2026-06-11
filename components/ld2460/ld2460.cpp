@@ -1,8 +1,7 @@
 #include "ld2460.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace ld2460 {
+namespace esphome::ld2460 {
 
 static const char *const TAG = "ld2460";
 static uint8_t LD2460_UPLOAD_HEAD[4] = {0xF4, 0xF3, 0xF2, 0xF1};
@@ -418,5 +417,4 @@ void LD2460Component::send_command(uint8_t command, const uint8_t *data, uint16_
   this->flush();
 }
 
-}  // namespace ld2460
-}  // namespace esphome
+} // namespace esphome::ld2460

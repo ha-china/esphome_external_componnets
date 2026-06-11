@@ -4,8 +4,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace dht30 {
+namespace esphome::dht30 {
 
 static const char *const TAG = "dht30";
 static const uint8_t READ_CMD[3] = {0xAC, 0x33, 0x00};  // Read command
@@ -66,5 +65,5 @@ void DHT30Component::update() {
   }
 }
 
-}  // namespace dht30
-}  // namespace esphome
+} // namespace esphome::dht30
+

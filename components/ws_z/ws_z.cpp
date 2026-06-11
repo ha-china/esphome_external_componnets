@@ -1,8 +1,7 @@
 #include "ws_z.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace ws_z {
+namespace esphome::ws_z {
 
 static const char *const TAG = "dart_ws_z";
 static const uint8_t DART_REQUEST_LENGTH = 8;
@@ -128,5 +127,4 @@ void DARTWSZComponent::dump_config() {
   this->check_uart_settings(9600);
 }
 
-}  // namespace ws_z
-}  // namespace esphome
+} // namespace esphome::ws_z

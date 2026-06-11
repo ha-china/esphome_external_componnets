@@ -1,7 +1,6 @@
 #include "angle_number.h"
 
-namespace esphome {
-namespace ld2460 {
+namespace esphome::ld2460 {
 
 void AngleNumber::control(float value) {
   this->publish_state(value);
@@ -9,5 +8,4 @@ void AngleNumber::control(float value) {
   this->parent_->get_install_params(); // todo read after change
 }
 
-}  // namespace ld2460
-}  // namespace esphome
+}  // namespace esphome::ld2460

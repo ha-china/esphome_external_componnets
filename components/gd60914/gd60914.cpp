@@ -1,8 +1,7 @@
 #include "gd60914.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace gd60914 {
+namespace esphome::gd60914 {
 
 static const char *const TAG = "gd60914";
 
@@ -58,4 +57,3 @@ void GD60914Component::calibrate42() {
 }
 
 }
-}  // namespace esphome

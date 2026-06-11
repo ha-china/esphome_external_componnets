@@ -6,8 +6,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/uart/uart.h"
 
-namespace esphome {
-namespace zexx {
+namespace esphome::zexx {
 
 enum ZEXX_MODE : uint8_t {
   ZEXX_MODE_PASSIVE = 0,  // 问答模式
@@ -34,5 +33,4 @@ class ZEXXComponent : public PollingComponent, public uart::UARTDevice {
 };
 
 
-} // esphome
-} // zexx
+}  // namespace esphome::zexx

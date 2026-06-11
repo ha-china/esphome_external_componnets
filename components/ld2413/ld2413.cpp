@@ -1,8 +1,7 @@
 #include "ld2413.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace ld2413 {
+namespace esphome::ld2413 {
 
 static const char *const TAG = "ld2413";
 
@@ -202,5 +201,4 @@ void LD2413Component::send_command(uint16_t command, const uint8_t *data, size_t
   this->status_clear_warning();
 }
 
-}  // namespace ld2413
-}  // namespace esphome
+} // namespace esphome::ld2413

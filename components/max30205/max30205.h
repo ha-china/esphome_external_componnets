@@ -6,8 +6,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace max30205 {
+namespace esphome::max30205 {
 
 enum MAX30205_DATA_FORMAT: uint8_t {
   MAX30205_DATA_FORMAT_NORMAL   = 0x00,        /**< normal format */
@@ -71,8 +70,8 @@ class MAX30205Component : public PollingComponent, public i2c::I2CDevice {
   friend class OverTemperatureTrigger;
   CallbackManager<void(float)> on_over_temperature_;
 
-  void add_on_over_temperature_callback(std::function<void(float)>&& callback) {
-    this->on_over_temperature_.add(std::move(callback));
+  template<typename F> void add_on_over_temperature_callback(F&& callback) {
+    this->on_over_temperature_.add(std::forward<F>(callback));
   }
   static void irq(MAX30205Component *c);
   bool interrupt_{false};
@@ -109,5 +108,4 @@ template<typename... Ts> class MAX30205WakeupAction : public Action<Ts...> {
   MAX30205Component *max30205_;
 };
 
-}
 }

@@ -3,8 +3,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace afs01 {
+namespace esphome::afs01 {
 
 static const char *const TAG = "afs01";
 static const uint8_t GET_DATA_CMD[2] = {0x10, 0x00};  // Get sensor data command
@@ -73,4 +72,3 @@ uint32_t AFS01Component::unique_id() {
 }
 
 }
-}  // namespace esphome

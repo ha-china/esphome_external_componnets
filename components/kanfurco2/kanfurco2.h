@@ -5,8 +5,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/uart/uart.h"
 
-namespace esphome {
-namespace kanfurco2 {
+namespace esphome::kanfurco2 {
 
 // enum DARTABCLogic { DART_ABC_NONE = 0, DART_ABC_ENABLED, DART_ABC_DISABLED };
 #define SB1_BUFFER_LEN 6  // Length of serial buffer for header + type + length
@@ -62,5 +61,4 @@ template<typename... Ts> class CalibrateAction: public Action<Ts...> {
     KANFURCO2Component *kanfurco2_;
 };
 
-}  // namespace kanfurco2
-}  // namespace esphome
+} // namespace esphome::kanfurco2

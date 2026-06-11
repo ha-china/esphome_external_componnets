@@ -7,8 +7,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace apm10 {
+namespace esphome::apm10 {
 
 enum APM10_TYPE: uint8_t {
   APM10_TYPE_10, // apm10 apm2000
@@ -38,5 +37,4 @@ class APM10Component : public PollingComponent, public i2c::I2CDevice {
 
 };
 
-}
 }

@@ -3,8 +3,7 @@
 #include "esphome/components/button/button.h"
 #include "../as201.h"
 
-namespace esphome {
-namespace as201 {
+namespace esphome::as201 {
 
 class RestartButton : public button::Button, public Parented<AS201Component> {
  public:
@@ -14,5 +13,4 @@ class RestartButton : public button::Button, public Parented<AS201Component> {
   void press_action() override;
 };
 
-}  // namespace as201
-}  // namespace esphome
+}  // namespace esphome::as201

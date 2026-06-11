@@ -1,8 +1,7 @@
 #include "zexx.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace zexx {
+namespace esphome::zexx {
 
 static const char *const TAG = "zexx";
 static const uint8_t ZEXX_REQUEST_LENGTH = 8;
@@ -120,4 +119,3 @@ void ZEXXComponent::dump_config() {
 }
 
 }  // namespace ws_z
-}  // namespace esphome

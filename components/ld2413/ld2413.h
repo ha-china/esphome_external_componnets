@@ -6,8 +6,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/uart/uart.h"
 
-namespace esphome {
-namespace ld2413 {
+namespace esphome::ld2413 {
 
 class LD2413Component : public Component, public uart::UARTDevice {
  public:
@@ -103,5 +102,4 @@ template<typename... Ts> class LD2413SetReportIntervalAction : public Action<Ts.
   LD2413Component *ld2413_;
 };
 
-}
 }

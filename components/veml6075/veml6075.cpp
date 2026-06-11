@@ -4,8 +4,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace veml6075 {
+namespace esphome::veml6075 {
 
 static const char *const TAG = "veml6075";
 static const uint8_t REG_UV_CONF = 0x00;
@@ -203,5 +202,4 @@ uint16_t VEML6075Component::read_data(uint8_t command) {
   return ((uint16_t) data[0]) | ((uint16_t) data[1]) << 8;  // 返回
 }
 
-}  // namespace veml6075
-}  // namespace esphome
+} // namespace esphome::veml6075

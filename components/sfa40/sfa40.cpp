@@ -1,8 +1,7 @@
 #include "sfa40.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace sfa40 {
+namespace esphome::sfa40 {
 
 static const char *const TAG = "sfa40";
 static const uint16_t SFA40_CMD_START = 0x00AC;
@@ -90,5 +89,4 @@ void SFA40Component::update() {
   });
 }
 
-}  // namespace sfa40
-}  // namespace esphome
+} // namespace esphome::sfa40

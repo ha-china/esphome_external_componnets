@@ -1,7 +1,6 @@
 #include "height_number.h"
 
-namespace esphome {
-namespace ld2460 {
+namespace esphome::ld2460 {
 
 void HeightNumber::control(float value) {
   this->publish_state(value);
@@ -9,5 +8,4 @@ void HeightNumber::control(float value) {
   this->parent_->get_install_params();
 }
 
-}  // namespace ld2460
-}  // namespace esphome
+}  // namespace esphome::ld2460

@@ -7,8 +7,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace veml6075 {
+namespace esphome::veml6075 {
 
 #define VEML6075_DEFAULT_UVA_A_COEFF 2.22       ///< Default for no coverglass
 #define VEML6075_DEFAULT_UVA_B_COEFF 1.33       ///< Default for no coverglass
@@ -106,5 +105,4 @@ template<typename... Ts> class VEML6075SetCoefficientsAction : public Action<Ts.
   VEML6075Component *veml6075_;
 };
 
-}  // namespace veml6075
-}  // namespace esphome
+} // namespace esphome::veml6075

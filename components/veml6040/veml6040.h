@@ -7,8 +7,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace veml6040 {
+namespace esphome::veml6040 {
 
 enum VEML6040_INTEGRATION_TIME: uint8_t {
   VEML6040_INTEGRATION_TIME_40MS,
@@ -74,5 +73,4 @@ template<typename... Ts> class VEML6040WakeupAction : public Action<Ts...> {
   VEML6040Component *veml6040_;
 };
 
-}
 }

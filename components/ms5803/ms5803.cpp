@@ -2,8 +2,7 @@
 #include "esphome/core/log.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace ms5803 {
+namespace esphome::ms5803 {
 
 static const char *const TAG = "ms5803";
 
@@ -131,5 +130,5 @@ void MS5803Component::calculate_values_(uint32_t raw_temperature, uint32_t raw_p
   this->status_clear_warning();
 }
 
-}  // namespace ms5803
-}  // namespace esphome
+} // namespace esphome::ms5803
+

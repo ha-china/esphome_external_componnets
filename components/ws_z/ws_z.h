@@ -6,8 +6,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/uart/uart.h"
 
-namespace esphome {
-namespace ws_z {
+namespace esphome::ws_z {
 
 //enum DARTABCLogic { DART_ABC_NONE = 0, DART_ABC_ENABLED, DART_ABC_DISABLED };
 #define SB1_BUFFER_LEN   6     // Length of serial buffer for header + type + length
@@ -40,4 +39,3 @@ class DARTWSZComponent : public PollingComponent, public uart::UARTDevice {
 
 
 }  // namespace dart
-}  // namespace esphome

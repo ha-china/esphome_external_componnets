@@ -5,8 +5,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/uart/uart.h"
 
-namespace esphome {
-namespace aof1000 {
+namespace esphome::aof1000 {
 
 class AOF1000Component : public PollingComponent, public uart::UARTDevice {
  public:
@@ -27,5 +26,4 @@ class AOF1000Component : public PollingComponent, public uart::UARTDevice {
   uint8_t buffer[12];
 };
 
-}
 }

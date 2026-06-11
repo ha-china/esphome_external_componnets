@@ -3,8 +3,7 @@
 #include "esphome/components/select/select.h"
 #include "../as201.h"
 
-namespace esphome {
-namespace as201 {
+namespace esphome::as201 {
 
 class DirectionSelect : public select::Select, public Parented<AS201Component> {
  public:
@@ -14,5 +13,4 @@ class DirectionSelect : public select::Select, public Parented<AS201Component> {
   void control(const std::string &value) override;
 };
 
-}  // namespace as201
-}  // namespace esphome
+}  // namespace esphome::as201

@@ -9,8 +9,7 @@
 #include "esphome/components/binary_sensor/binary_sensor.h"
 #endif
 
-namespace esphome {
-namespace stream_client {
+namespace esphome::stream_client {
 
 class StreamClientComponent: public Component, public uart::UARTDevice {
 #ifdef USE_BINARY_SENSOR
@@ -36,5 +35,4 @@ class StreamClientComponent: public Component, public uart::UARTDevice {
 
 };
 
-}
 }

@@ -2,8 +2,7 @@
 #include <bitset>
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace as201 {
+namespace esphome::as201 {
 
 static const char *const TAG = "as201";
 
@@ -485,5 +484,4 @@ void AS201Component::set_subscribe_flag(bool accel, bool gyro, bool angle,
 }
 
 
-}  // namespace as201
-}  // namespace esphome
+} // namespace esphome::as201

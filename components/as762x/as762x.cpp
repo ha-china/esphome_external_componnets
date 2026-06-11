@@ -4,8 +4,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace as762x {
+namespace esphome::as762x {
 
 static const char *const TAG = "as762x";
 static const uint8_t REG_STATUS = 0x00;  // read-only
@@ -551,5 +550,4 @@ uint8_t AS762XComponent::write_virtual_register(uint8_t addr, uint8_t data) {
   return 0;  // ok
 }
 
-}  // namespace as762x
-}  // namespace esphome
+} // namespace esphome::as762x

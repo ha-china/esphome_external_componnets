@@ -1,8 +1,7 @@
 #include "stream_client.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace stream_client {
+namespace esphome::stream_client {
 
 static const char *const TAG = "stream_client";
 
@@ -67,5 +66,4 @@ void StreamClientComponent::dump_config() {
 #endif
 }
 
-}  // namespace stream_client
-}
+} // namespace esphome::stream_client

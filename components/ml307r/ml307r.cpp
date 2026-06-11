@@ -1,8 +1,7 @@
 #include "ml307r.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace ml307r {
+namespace esphome::ml307r {
 
 static const char *const TAG = "ml307r";
 
@@ -555,5 +554,5 @@ std::string ML307RComponent::format_timestamp_(const std::string &pdu_timestamp)
   return std::string(buf);
 }
 
-}  // namespace ml307r
-}  // namespace esphome
+} // namespace esphome::ml307r
+

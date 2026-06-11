@@ -4,8 +4,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/i2c/i2c.h"
 
-namespace esphome {
-namespace ms5803 {
+namespace esphome::ms5803 {
 
 class MS5803Component : public PollingComponent, public i2c::I2CDevice {
  public:
@@ -27,5 +26,5 @@ class MS5803Component : public PollingComponent, public i2c::I2CDevice {
   uint16_t prom_[6];
 };
 
-}  // namespace ms5803
-}  // namespace esphome
+} // namespace esphome::ms5803
+

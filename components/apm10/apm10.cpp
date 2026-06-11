@@ -3,8 +3,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace apm10 {
+namespace esphome::apm10 {
 
 static const char *const TAG = "apm10";
 static const uint8_t START_MEASUREMENT_CMD[5] = {0x00, 0x10, 0x05, 0x00, 0xF6};  // Start measurement command
@@ -95,5 +94,4 @@ void APM10Component::update() {
   }
 }
 
-}
 }

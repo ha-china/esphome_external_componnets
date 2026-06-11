@@ -8,8 +8,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace dht30 {
+namespace esphome::dht30 {
 
 class DHT30Component : public PollingComponent, public i2c::I2CDevice {
  public:
@@ -26,5 +25,4 @@ class DHT30Component : public PollingComponent, public i2c::I2CDevice {
   sensor::Sensor *humidity_sensor_{nullptr};
 };
 
-} // namespace dht30
-} // namespace esphome
+} // namespace esphome::dht30

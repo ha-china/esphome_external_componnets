@@ -1,8 +1,7 @@
 #include "acd3100.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace acd3100 {
+namespace esphome::acd3100 {
 
 static const char *const TAG = "acd3100";
 static const uint8_t READ_CMD[2] = {0x03, 0x00};  // Read command
@@ -120,5 +119,4 @@ void ACD3100Component::sn(char *buffer) {
   this->read((uint8_t*)buffer, 10);                  // 读取响应
 }
 
-}  // namespace acd3100
-}  // namespace esphome
+} // namespace esphome::acd3100

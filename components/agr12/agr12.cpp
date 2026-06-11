@@ -3,8 +3,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace agr12 {
+namespace esphome::agr12 {
 
 static const char *const TAG = "agr12";
 static const uint8_t READ_CMD[2] = {0xAC, 0x12};  // 读取命令
@@ -52,5 +51,4 @@ void AGR12Component::update() {
   }
 }
 
-}
 }

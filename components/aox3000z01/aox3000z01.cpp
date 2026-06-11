@@ -1,8 +1,7 @@
 #include "aox3000z01.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace aox3000z01 {
+namespace esphome::aox3000z01 {
 
 static const char *const TAG = "aox3000z01";
 static const uint8_t A0X3000Z01_RESPONSE_LENGTH = 12;
@@ -68,5 +67,4 @@ void AOX3000Z01Component::update() {
   this->status_clear_warning();
 }
 
-}  // namespace aox3000z01
-}  // namespace esphome
+} // namespace esphome::aox3000z01

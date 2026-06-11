@@ -2,8 +2,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace cps610 {
+namespace esphome::cps610 {
 
 static const char *const TAG = "cps610";
 static const uint8_t REG_MEASURE = 0x30;
@@ -37,5 +36,4 @@ void CPS610Component::dump_config() {
   LOG_SENSOR("  ", "PRESSURE SENSOR", this->pressure_sensor_);
 }
 
-}  // namespace cps610
-}  // namespace esphome
+} // namespace esphome::cps610

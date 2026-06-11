@@ -8,8 +8,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace agr12 {
+namespace esphome::agr12 {
 
 enum AGR_TYPE: uint8_t {
   AGR12,
@@ -31,5 +30,4 @@ class AGR12Component : public PollingComponent, public i2c::I2CDevice {
   AGR_TYPE type_;
 };
 
-}  // namespace agr12
-}  // namespace esphome
+} // namespace esphome::agr12

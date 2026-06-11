@@ -16,8 +16,7 @@
 #include "esphome/components/binary_sensor/binary_sensor.h"
 #endif
 
-namespace esphome {
-namespace ld2451 {
+namespace esphome::ld2451 {
 
 #define MAX_TARGETS 20
 
@@ -187,5 +186,4 @@ template<typename... Ts> class LD2451SetTargetDetectConfigAction : public Action
 };
 
 
-}  // namespace ld2451
-}  // namespace esphome
+} // namespace esphome::ld2451

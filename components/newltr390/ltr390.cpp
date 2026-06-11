@@ -3,8 +3,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace newltr390 {
+namespace esphome::newltr390 {
 
 static const char *const TAG = "newltr390";
 
@@ -45,6 +44,7 @@ optional<uint32_t> LTR390Component::read_sensor_data_(LTR390MODE mode) {
   uint8_t buffer[num_bytes];
 
   // Wait until data available
+  constexpr uint32_t max_wait_ms = 25;
   const uint32_t now = millis();
   while (true) {
     std::bitset<8> status = this->reg(LTR390_MAIN_STATUS).get();
@@ -52,12 +52,12 @@ optional<uint32_t> LTR390Component::read_sensor_data_(LTR390MODE mode) {
     if (available)
       break;
 
-    if (millis() - now > 100) {
+    if (millis() - now > max_wait_ms) {
       ESP_LOGW(TAG, "Sensor didn't return any data, aborting");
       return {};
     }
-    ESP_LOGD(TAG, "Waiting for data");
-    delay(2);
+    ESP_LOGV(TAG, "Waiting for data");
+    delay(1);
   }
 
   if (!this->read_bytes(MODEADDRESSES[mode], buffer, num_bytes)) {
@@ -200,5 +200,5 @@ void LTR390Component::update() {
   }
 }
 
-}  // namespace ltr390
-}  // namespace esphome
+}  // namespace esphome::ltr390
+

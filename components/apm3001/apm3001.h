@@ -5,8 +5,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/uart/uart.h"
 
-namespace esphome {
-namespace apm3001 {
+namespace esphome::apm3001 {
 
 class APM3001Component : public PollingComponent, public uart::UARTDevice {
  public:
@@ -29,5 +28,4 @@ class APM3001Component : public PollingComponent, public uart::UARTDevice {
   void stop_measurement();
 };
 
-} // namespace apm3001
-} // namespace esphome
+} // namespace esphome::apm3001

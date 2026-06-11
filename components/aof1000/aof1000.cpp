@@ -1,8 +1,7 @@
 #include "aof1000.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace aof1000 {
+namespace esphome::aof1000 {
 
 static const char *const TAG = "aof1000";
 static const uint8_t GET_DATA_CMD[4] = {0x11, 0x01, 0x01, 0xED};
@@ -64,5 +63,4 @@ void AOF1000Component::update() {
   this->status_clear_warning();
 }
 
-}  // namespace aof1000
-}  // namespace esphome
+} // namespace esphome::aof1000

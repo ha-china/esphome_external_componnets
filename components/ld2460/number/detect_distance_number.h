@@ -3,8 +3,7 @@
 #include "esphome/components/number/number.h"
 #include "../ld2460.h"
 
-namespace esphome {
-namespace ld2460 {
+namespace esphome::ld2460 {
 
 class DetectDistanceNumber : public number::Number, public Parented<LD2460Component> {
  public:
@@ -31,5 +30,4 @@ class DetectEndAngleNumber: public number::Number, public Parented<LD2460Compone
 };
 
 
-} // namespace ld2460
-} // namespace esphome
+}  // namespace esphome::ld2460

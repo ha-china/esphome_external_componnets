@@ -1,7 +1,6 @@
 #include "detect_distance_number.h"
 
-namespace esphome {
-namespace ld2460 {
+namespace esphome::ld2460 {
 
 void DetectDistanceNumber::control(float value) {
   this->publish_state(value);
@@ -27,5 +26,4 @@ void DetectEndAngleNumber::control(float value) {
   this->parent_->get_detect_range();
 }
 
-}  // namespace ld2460
-}  // namespace esphome
+}  // namespace esphome::ld2460

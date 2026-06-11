@@ -7,8 +7,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace afs01 {
+namespace esphome::afs01 {
 
 class AFS01Component: public PollingComponent, public i2c::I2CDevice {
  public:
@@ -26,4 +25,4 @@ class AFS01Component: public PollingComponent, public i2c::I2CDevice {
 };
 
 }
-}
+

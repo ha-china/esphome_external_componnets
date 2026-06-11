@@ -1,7 +1,6 @@
 #include "sensitivity_select.h"
 
-namespace esphome {
-namespace ld2460 {
+namespace esphome::ld2460 {
 
 void SensitivitySelect::control(const std::string &value) {
   this->publish_state(value);
@@ -9,5 +8,4 @@ void SensitivitySelect::control(const std::string &value) {
   this->parent_->get_sensitivity();
 }
 
-}  // namespace ld2460
-}  // namespace esphome
+}  // namespace esphome::ld2460

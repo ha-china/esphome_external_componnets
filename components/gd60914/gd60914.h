@@ -5,8 +5,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/uart/uart.h"
 
-namespace esphome {
-namespace gd60914 {
+namespace esphome::gd60914 {
 
 enum GD60914_MODE: uint8_t {
   GD60914_MODE_OBJ = 0xAA,
@@ -63,7 +62,7 @@ template<typename... Ts> class GD60914Calibrate42Action : public Action<Ts...> {
  protected:
   GD60914Component *gd60914_;
 };
-} // namespace gd60914
-} // namespace esphome
+} // namespace esphome::gd60914
+
 
 

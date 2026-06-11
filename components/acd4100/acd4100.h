@@ -7,8 +7,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace acd4100 {
+namespace esphome::acd4100 {
 
 class ACD4100Component : public PollingComponent, public i2c::I2CDevice {
  public:
@@ -64,5 +63,4 @@ template<typename... Ts> class ACD4100ResetAction : public Action<Ts...> {
   ACD4100Component *acd4100_;
 };
 
-} // namespace acd4100
-} // namespace esphome
+} // namespace esphome::acd4100

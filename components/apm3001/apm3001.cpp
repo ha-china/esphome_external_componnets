@@ -1,8 +1,7 @@
 #include "apm3001.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace apm3001 {
+namespace esphome::apm3001 {
 
 static const char *const TAG = "apm3001";
 static const uint8_t START_MEASUREMENT_CMD[5] = {0xFE, 0xA5, 0x00, 0x11, 0xB6};
@@ -87,5 +86,4 @@ void APM3001Component::stop_measurement() {
   }
 }
 
-}
 }

@@ -4,8 +4,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace veml6040 {
+namespace esphome::veml6040 {
 
 static const char *const TAG = "veml6040";
 static const uint8_t REG_CONF = 0x00;
@@ -125,5 +124,4 @@ void VEML6040Component::update() {
 }
 
 
-}
 }

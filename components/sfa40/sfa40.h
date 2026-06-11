@@ -7,8 +7,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace sfa40 {
+namespace esphome::sfa40 {
 
 enum ErrorCode {
   DEVICE_MARKING_READ_FAILED,
@@ -37,5 +36,4 @@ class SFA40Component : public PollingComponent, public sensirion_common::Sensiri
   sensor::Sensor *temperature_sensor_{nullptr};
 };
 
-} // namespace sfa40
-} // namespace esphome
+} // namespace esphome::sfa40

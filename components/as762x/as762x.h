@@ -7,8 +7,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace as762x {
+namespace esphome::as762x {
 
 #define AS726x_DEVICE_TYPE 0x00
 #define AS726x_HW_VERSION 0x01
@@ -178,9 +177,9 @@ class AS762XComponent : public PollingComponent, public i2c::I2CDevice {
   friend class DataReadyTrigger;
   bool interrupt_{false};  // is it happend
   static void irq(AS762XComponent *c);
-  CallbackManager<void()> on_data_ready_;
-  void add_on_data_ready_callback(std::function<void()>&& callback) {
-    this->on_data_ready_.add(std::move(callback));
+  LazyCallbackManager<void()> on_data_ready_;
+  template<typename F> void add_on_data_ready_callback(F&& callback) {
+    this->on_data_ready_.add(std::forward<F>(callback));
   }
 
 
@@ -239,5 +238,4 @@ template<typename... Ts> class AS762XResetAction : public Action<Ts...> {
   AS762XComponent *as762x_;
 };
 
-}  // namespace as762x
-}  // namespace esphome
+} // namespace esphome::as762x

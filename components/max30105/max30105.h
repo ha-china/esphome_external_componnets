@@ -13,8 +13,7 @@
 #include "esphome/components/binary_sensor/binary_sensor.h"
 #endif
 
-namespace esphome {
-namespace max30105 {
+namespace esphome::max30105 {
 
 enum MAX30105_MODE : uint8_t {
   MAX30105_MODE_HR_ONLY = 0x02,    // 仅红光模式
@@ -220,23 +219,23 @@ class MAX30105Component : public PollingComponent, public i2c::I2CDevice {
   CallbackManager<void()> on_prox_int_callback_;
   CallbackManager<void(float)> on_temp_ready_callback_;
 
-  void add_on_power_ready_callback(std::function<void()>&& callback) {
-    this->on_power_ready_callback_.add(std::move(callback));
+  template<typename F> void add_on_power_ready_callback(F&& callback) {
+    this->on_power_ready_callback_.add(std::forward<F>(callback));
   }
-  void add_on_fifo_almost_full_callback(std::function<void()>&& callback) {
-    this->on_fifo_almost_full_callback_.add(std::move(callback));
+  template<typename F> void add_on_fifo_almost_full_callback(F&& callback) {
+    this->on_fifo_almost_full_callback_.add(std::forward<F>(callback));
   }
-  void add_on_data_ready_callback(std::function<void()>&& callback) {
-    this->on_data_ready_callback_.add(std::move(callback));
+  template<typename F> void add_on_data_ready_callback(F&& callback) {
+    this->on_data_ready_callback_.add(std::forward<F>(callback));
   }
-  void add_on_alc_overflow_callback(std::function<void()>&& callback) {
-    this->on_alc_overflow_callback_.add(std::move(callback));
+  template<typename F> void add_on_alc_overflow_callback(F&& callback) {
+    this->on_alc_overflow_callback_.add(std::forward<F>(callback));
   }
-  void add_on_prox_int_callback(std::function<void()>&& callback) {
-    this->on_prox_int_callback_.add(std::move(callback));
+  template<typename F> void add_on_prox_int_callback(F&& callback) {
+    this->on_prox_int_callback_.add(std::forward<F>(callback));
   }
-  void add_on_temp_ready_callback(std::function<void(float)>&& callback) {
-    this->on_temp_ready_callback_.add(std::move(callback));
+  template<typename F> void add_on_temp_ready_callback(F&& callback) {
+    this->on_temp_ready_callback_.add(std::forward<F>(callback));
   }
 };  // class MAX30105Component
 
@@ -372,5 +371,5 @@ template<typename... Ts> class MAX30105SimulateInterruptAction : public Action<T
   MAX30105Component *max30105_;
 };
 
-}  // namespace max30105
-}  // namespace esphome
+} // namespace esphome::max30105
+

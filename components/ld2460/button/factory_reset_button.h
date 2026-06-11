@@ -3,8 +3,7 @@
 #include "esphome/components/button/button.h"
 #include "../ld2460.h"
 
-namespace esphome {
-namespace ld2460 {
+namespace esphome::ld2460 {
 
 class FactoryResetButton : public button::Button, public Parented<LD2460Component> {
  public:
@@ -14,5 +13,4 @@ class FactoryResetButton : public button::Button, public Parented<LD2460Componen
   void press_action() override;
 };
 
-}  // namespace ld2460
-}  // namespace esphome
+}  // namespace esphome::ld2460

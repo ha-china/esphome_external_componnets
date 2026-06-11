@@ -7,8 +7,7 @@
 #include "esphome/core/component.h"
 #include "esphome/core/hal.h"
 
-namespace esphome {
-namespace ash01ib {
+namespace esphome::ash01ib {
 
 enum STATE: uint8_t {
   STATE_WAITING,
@@ -73,5 +72,4 @@ template<typename... Ts> class ASH01IBStopCalibrationAction : public Action<Ts..
   ASH01IBComponent *ash01ib_;
 };
 
-}
 }

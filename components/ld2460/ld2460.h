@@ -29,8 +29,7 @@
 #include "esphome/components/switch/switch.h"
 #endif
 
-namespace esphome {
-namespace ld2460 {
+namespace esphome::ld2460 {
 
 #define MAX_TARGETS 5
 
@@ -99,8 +98,8 @@ class LD2460Component : public Component, public uart::UARTDevice {
 
   void restart_and_read_all_info();
   void read_all_info();
-  void add_on_data_callback(std::function<void()> &&callback) {
-    this->data_callback_.add(std::move(callback));
+  template<typename F> void add_on_data_callback(F &&callback) {
+    this->data_callback_.add(std::forward<F>(callback));
   }
  protected:
   float height_;
@@ -191,5 +190,5 @@ public:
   }
 };
 
-} // namespace ld2460
-} // namespace esphome
+} // namespace esphome::ld2460
+

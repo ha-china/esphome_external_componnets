@@ -3,8 +3,7 @@
 #include "esphome/core/hal.h"
 #include "esphome/core/log.h"
 
-namespace esphome {
-namespace max30105 {
+namespace esphome::max30105 {
 
 static const char *const TAG = "max30105";
 // 寄存器地址常量 (根据数据手册定义)
@@ -398,5 +397,4 @@ void MAX30105Component::simulate_interrupt() {
   this->interrupt_ = true;
 }
 
-}  // namespace max30105
-}  // namespace esphome
+} // namespace esphome::max30105
