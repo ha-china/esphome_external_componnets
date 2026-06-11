@@ -101,6 +101,8 @@ class LD2460Component : public Component, public uart::UARTDevice {
   template<typename F> void add_on_data_callback(F &&callback) {
     this->data_callback_.add(std::forward<F>(callback));
   }
+
+  void save_to_flash();
  protected:
   float height_;
   float angle_;
@@ -115,6 +117,13 @@ class LD2460Component : public Component, public uart::UARTDevice {
 #ifdef USE_SENSOR
   std::array<sensor::Sensor *, MAX_TARGETS> target_x_sensors_{};
   std::array<sensor::Sensor *, MAX_TARGETS> target_y_sensors_{};
+#endif
+#ifdef USE_NUMBER
+  ESPPreferenceObject pref_height_;
+  ESPPreferenceObject pref_angle_;
+  ESPPreferenceObject pref_detect_distance_;
+  ESPPreferenceObject pref_detect_start_angle_;
+  ESPPreferenceObject pref_detect_end_angle_;
 #endif
   void send_command(uint8_t command, const uint8_t *data, uint16_t data_size);
   std::vector<uint8_t> receive_buffer;
