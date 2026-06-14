@@ -13,11 +13,14 @@ static uint8_t LD2460_CMD_TAIL[4] = {0x04, 0x03, 0x02, 0x01};
 void LD2460Component::setup() {
   ESP_LOGCONFIG(TAG, "Setting up LD2460...");
   this->restart();
-  this->set_install_params(this->height_, this->angle_);
-  this->set_mode(this->mode_);
-  this->set_detect_range(this->detect_distance_, this->detect_start_angle_, this->detect_end_angle_);
-  this->set_sensitivity(this->sensitivity_);
-  this->set_timeout(1500, [this]() { this->read_all_info(); });
+  // Wait for radar to finish rebooting before sending config commands
+  this->set_timeout(1500, [this]() {
+    this->set_install_params(this->height_, this->angle_);
+    this->set_mode(this->mode_);
+    this->set_detect_range(this->detect_distance_, this->detect_start_angle_, this->detect_end_angle_);
+    this->set_sensitivity(this->sensitivity_);
+    this->set_timeout(500, [this]() { this->read_all_info(); });
+  });
 #ifdef USE_SELECT
   if (this->baud_rate_select_ != nullptr) {
     this->baud_rate_select_->publish_state(std::to_string(this->parent_->get_baud_rate()));
@@ -130,8 +133,10 @@ void LD2460Component::parse_upload() {
     if (target_num > 0) {
       this->target_binary_sensor_->publish_state(true);
     } else {
-      this->target_binary_sensor_->publish_state(false);  // this never happens
+      this->target_binary_sensor_->publish_state(false);
     }
+    // Radar only sends upload frames when targets are detected;
+    // use timeout to clear the binary sensor when no frames arrive
     this->set_timeout("timeout", 1000, [this]() { this->target_binary_sensor_->publish_state(false); });
   }
 #endif
@@ -175,10 +180,14 @@ void LD2460Component::parse_ack() {
   switch (cmd) {
     case 0x06: {  // 雷达开启/关闭上报功能设置回执
       uint8_t d = this->receive_buffer[7];
-      if (d == 0x00) {
-        ESP_LOGW(TAG, "disable upload fail");
-      } else if (d == 0x01) {
-        ESP_LOGW(TAG, "enable upload fail");
+      uint8_t result = (d >> 4) & 0x0F;  // 高4位: 0=失败, 1=成功
+      uint8_t operation = d & 0x0F;      // 低4位: 0=关闭, 1=开启
+      if (result == 0x00) {
+        ESP_LOGW(TAG, "%s upload failed", operation == 0x01 ? "enable" : "disable");
+      } else if (result == 0x01) {
+        ESP_LOGD(TAG, "%s upload success", operation == 0x01 ? "enable" : "disable");
+      } else {
+        ESP_LOGW(TAG, "upload set unknown result: %02X", d);
       }
       break;
     }
@@ -186,6 +195,8 @@ void LD2460Component::parse_ack() {
       uint8_t d = this->receive_buffer[7];
       if (d == 0x00) {
         ESP_LOGW(TAG, "set install params fail");
+      } else if (d == 0x01) {
+        ESP_LOGD(TAG, "set install params success");
       }
       break;
     }
@@ -204,10 +215,14 @@ void LD2460Component::parse_ack() {
     }
     case 0x09: {  // 设置安装模式雷达回执协议
       uint8_t d = this->receive_buffer[7];
-      if (d == 0x01) {
-        ESP_LOGW(TAG, "set side install mode fail");
-      } else if (d == 0x02) {
-        ESP_LOGW(TAG, "set top install mode fail");
+      uint8_t result = (d >> 4) & 0x0F;  // 高4位: 0=失败, 1=成功
+      uint8_t mode_val = d & 0x0F;       // 低4位: 1=侧装, 2=顶装
+      if (result == 0x00) {
+        ESP_LOGW(TAG, "set %s install mode fail", mode_val == 0x01 ? "side" : "top");
+      } else if (result == 0x01) {
+        ESP_LOGD(TAG, "set %s install mode success", mode_val == 0x01 ? "side" : "top");
+      } else {
+        ESP_LOGW(TAG, "set install mode unknown result: %02X", d);
       }
       break;
     }
@@ -225,6 +240,7 @@ void LD2460Component::parse_ack() {
       break;
     }
     case 0x0B: {  // 雷达版本号回执协议
+      uint8_t install_mode = this->receive_buffer[7];  // 01=侧装/02=顶装
       uint8_t year = this->receive_buffer[8];
       uint8_t month = this->receive_buffer[9];
       uint8_t major = this->receive_buffer[10];
@@ -236,14 +252,36 @@ void LD2460Component::parse_ack() {
         this->version_text_sensor_->publish_state(version);
       }
 #endif
+#ifdef USE_SELECT
+      if (this->mode_select_ != nullptr) {
+        if (install_mode == 0x01) {
+          this->mode_select_->publish_state("Side");
+        } else if (install_mode == 0x02) {
+          this->mode_select_->publish_state("Top");
+        }
+      }
+#endif
       break;
     }
     case 0x0E: {  // 雷达修改波特率回执协议
       uint8_t d = this->receive_buffer[7];
       if (d == 0x00) {
         ESP_LOGW(TAG, "set baud rate fail");
+        this->pending_baud_rate_.clear();
       } else {
-        this->parent_->load_settings(false);
+        ESP_LOGD(TAG, "set baud rate success");
+        if (!this->pending_baud_rate_.empty()) {
+          uint32_t new_baud_rate = stoi(this->pending_baud_rate_);
+          this->pending_baud_rate_.clear();
+          if (this->parent_->get_baud_rate() != new_baud_rate) {
+            // Restart radar at new baud rate; and reload UART settings
+            this->set_timeout(200, [this, new_baud_rate]() {
+              this->restart();
+              this->parent_->set_baud_rate(new_baud_rate);
+              this->parent_->load_settings(false);
+            });
+          }
+        }
       }
       break;
     }
@@ -251,6 +289,8 @@ void LD2460Component::parse_ack() {
       uint8_t d = this->receive_buffer[7];
       if (d == 0x00) {
         ESP_LOGW(TAG, "factory reset fail");
+      } else if (d == 0x01) {
+        ESP_LOGD(TAG, "factory reset success");
       }
       break;
     }
@@ -258,6 +298,8 @@ void LD2460Component::parse_ack() {
       uint8_t d = this->receive_buffer[7];
       if (d == 0x00) {
         ESP_LOGW(TAG, "set detect range fail");
+      } else if (d == 0x01) {
+        ESP_LOGD(TAG, "set detect range success");
       }
       break;
     }
@@ -282,6 +324,8 @@ void LD2460Component::parse_ack() {
       uint8_t d = this->receive_buffer[7];
       if (d == 0x00) {
         ESP_LOGW(TAG, "set sensitivity fail");
+      } else if (d == 0x01) {
+        ESP_LOGD(TAG, "set sensitivity success");
       }
       break;
     }
@@ -404,12 +448,9 @@ void LD2460Component::set_baud_rate(const std::string &baud_rate) {
   } else if (baud_rate == "460800") {
     data = 0x07;
   }
+  // Store the target baud rate; will apply after successful ACK from radar
+  this->pending_baud_rate_ = baud_rate;
   this->send_command(0x0E, &data, 1);
-  uint32_t new_baud_rate = stoi(baud_rate);
-  if (this->parent_->get_baud_rate() != new_baud_rate) {
-    this->parent_->set_baud_rate(new_baud_rate);
-  }
-  this->set_timeout(200, [this]() { this->restart(); });
 }
 
 void LD2460Component::factory_reset() {

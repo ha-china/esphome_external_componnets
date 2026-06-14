@@ -76,11 +76,11 @@ class LD2460Component : public Component, public uart::UARTDevice {
 #endif
   void set_height_(float height) {this->height_ = height;} // 安装高度
   void set_angle_(float angle) {this->angle_ = angle;} // 安装角度
-  void set_mode_(const std::string mode) {this->mode_ = mode;};
+  void set_mode_(const std::string &mode) {this->mode_ = mode;};
   void set_detect_distance_(float distance) {this->detect_distance_ = distance;};
   void set_detect_start_angle_(float angle) {this->detect_start_angle_ = angle;};
   void set_detect_end_angle_(float angle) {this->detect_end_angle_ = angle;};
-  void set_sensitivity_(std::string sensitivity) {this->sensitivity_ = sensitivity;};
+  void set_sensitivity_(const std::string &sensitivity) {this->sensitivity_ = sensitivity;};
 
   void enable_upload(bool enable);
   void set_install_params(float height, float angle);
@@ -111,6 +111,7 @@ class LD2460Component : public Component, public uart::UARTDevice {
   float detect_start_angle_;
   float detect_end_angle_;
   std::string sensitivity_;
+  std::string pending_baud_rate_;
 
   LazyCallbackManager<void()> data_callback_;
 
