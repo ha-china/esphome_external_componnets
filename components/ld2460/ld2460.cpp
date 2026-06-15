@@ -27,57 +27,57 @@ void LD2460Component::setup() {
   }
 #endif
 #ifdef USE_NUMBER
-  float value;
-  if (this->height_number_ != nullptr) {
-    this->pref_height_ = this->height_number_->make_entity_preference<float>();
-    if (this->pref_height_.load(&value)) {
-      this->task_queue_.emplace([this, value]() { this->height_number_->make_call().set_value(value).perform();});
-    } // call number->control publish_state set_xxx save_to_flash later publish_state again
-  }
-  if (this->angle_number_ != nullptr) {
-    this->pref_angle_ = this->angle_number_->make_entity_preference<float>();
-    if (this->pref_angle_.load(&value)) {
-      this->task_queue_.emplace([this, value]() { this->angle_number_->make_call().set_value(value).perform();});
-    }
-  }
-  if (this->detect_distance_number_ != nullptr) {
-    this->pref_detect_distance_ = this->detect_distance_number_->make_entity_preference<float>();
-    if (this->pref_detect_distance_.load(&value)) {
-      this->task_queue_.emplace([this, value]() { this->detect_distance_number_->make_call().set_value(value).perform();});
-    }
-  }
-  if (this->detect_start_angle_number_ != nullptr) {
-    this->pref_detect_start_angle_ = this->detect_start_angle_number_->make_entity_preference<float>();
-    if (this->pref_detect_start_angle_.load(&value)) {
-      this->task_queue_.emplace([this, value]() { this->detect_start_angle_number_->make_call().set_value(value).perform();});
-    }
-  }
-  if (this->detect_end_angle_number_ != nullptr) {
-    this->pref_detect_end_angle_ = this->detect_end_angle_number_->make_entity_preference<float>();
-    if (this->pref_detect_end_angle_.load(&value)) {
-      this->task_queue_.emplace([this, value]() { this->detect_end_angle_number_->make_call().set_value(value).perform();});
-    }
-  }
+  // float value;
+  // if (this->height_number_ != nullptr) {
+  //   this->pref_height_ = this->height_number_->make_entity_preference<float>();
+  //   if (this->pref_height_.load(&value)) {
+  //     this->task_queue_.emplace([this, value]() { this->height_number_->make_call().set_value(value).perform();});
+  //   } // call number->control publish_state set_xxx save_to_flash later publish_state again
+  // }
+  // if (this->angle_number_ != nullptr) {
+  //   this->pref_angle_ = this->angle_number_->make_entity_preference<float>();
+  //   if (this->pref_angle_.load(&value)) {
+  //     this->task_queue_.emplace([this, value]() { this->angle_number_->make_call().set_value(value).perform();});
+  //   }
+  // }
+  // if (this->detect_distance_number_ != nullptr) {
+  //   this->pref_detect_distance_ = this->detect_distance_number_->make_entity_preference<float>();
+  //   if (this->pref_detect_distance_.load(&value)) {
+  //     this->task_queue_.emplace([this, value]() { this->detect_distance_number_->make_call().set_value(value).perform();});
+  //   }
+  // }
+  // if (this->detect_start_angle_number_ != nullptr) {
+  //   this->pref_detect_start_angle_ = this->detect_start_angle_number_->make_entity_preference<float>();
+  //   if (this->pref_detect_start_angle_.load(&value)) {
+  //     this->task_queue_.emplace([this, value]() { this->detect_start_angle_number_->make_call().set_value(value).perform();});
+  //   }
+  // }
+  // if (this->detect_end_angle_number_ != nullptr) {
+  //   this->pref_detect_end_angle_ = this->detect_end_angle_number_->make_entity_preference<float>();
+  //   if (this->pref_detect_end_angle_.load(&value)) {
+  //     this->task_queue_.emplace([this, value]() { this->detect_end_angle_number_->make_call().set_value(value).perform();});
+  //   }
+  // }
 #endif
 }
 
 void LD2460Component::save_to_flash() {
 #ifdef USE_NUMBER
-  if (this->height_number_ != nullptr && this->height_number_->has_state()) {
-    this->pref_height_.save(&this->height_number_->state);
-  }
-  if (this->angle_number_ != nullptr && this->angle_number_->has_state()) {
-    this->pref_angle_.save(&this->angle_number_->state);
-  }
-  if (this->detect_distance_number_ != nullptr && this->detect_distance_number_->has_state()) {
-    this->pref_detect_distance_.save(&this->detect_distance_number_->state);
-  }
-  if (this->detect_start_angle_number_ != nullptr && this->detect_start_angle_number_->has_state()) {
-    this->pref_detect_start_angle_.save(&this->detect_start_angle_number_->state);
-  }
-  if (this->detect_end_angle_number_ != nullptr && this->detect_end_angle_number_->has_state()) {
-    this->pref_detect_end_angle_.save(&this->detect_end_angle_number_->state);
-  }
+  // if (this->height_number_ != nullptr && this->height_number_->has_state()) {
+  //   this->pref_height_.save(&this->height_number_->state);
+  // }
+  // if (this->angle_number_ != nullptr && this->angle_number_->has_state()) {
+  //   this->pref_angle_.save(&this->angle_number_->state);
+  // }
+  // if (this->detect_distance_number_ != nullptr && this->detect_distance_number_->has_state()) {
+  //   this->pref_detect_distance_.save(&this->detect_distance_number_->state);
+  // }
+  // if (this->detect_start_angle_number_ != nullptr && this->detect_start_angle_number_->has_state()) {
+  //   this->pref_detect_start_angle_.save(&this->detect_start_angle_number_->state);
+  // }
+  // if (this->detect_end_angle_number_ != nullptr && this->detect_end_angle_number_->has_state()) {
+  //   this->pref_detect_end_angle_.save(&this->detect_end_angle_number_->state);
+  // }
 #endif
 }
 

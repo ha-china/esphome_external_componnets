@@ -120,11 +120,11 @@ class LD2460Component : public Component, public uart::UARTDevice {
   std::array<sensor::Sensor *, MAX_TARGETS> target_y_sensors_{};
 #endif
 #ifdef USE_NUMBER
-  ESPPreferenceObject pref_height_;
-  ESPPreferenceObject pref_angle_;
-  ESPPreferenceObject pref_detect_distance_;
-  ESPPreferenceObject pref_detect_start_angle_;
-  ESPPreferenceObject pref_detect_end_angle_;
+  // ESPPreferenceObject pref_height_;
+  // ESPPreferenceObject pref_angle_;
+  // ESPPreferenceObject pref_detect_distance_;
+  // ESPPreferenceObject pref_detect_start_angle_;
+  // ESPPreferenceObject pref_detect_end_angle_;
 #endif
   void send_command(uint8_t command, const uint8_t *data, uint16_t data_size);
   std::vector<uint8_t> receive_buffer;
