@@ -8,23 +8,8 @@
 #ifdef USE_SENSOR
 #include "esphome/components/sensor/sensor.h"
 #endif
-#ifdef USE_TEXT_SENSOR
-#include "esphome/components/text_sensor/text_sensor.h"
-#endif
-#ifdef USE_BINARY_SENSOR
-#include "esphome/components/binary_sensor/binary_sensor.h"
-#endif
-#ifdef USE_NUMBER
-#include "esphome/components/number/number.h"
-#endif
-#ifdef USE_SELECT
-#include "esphome/components/select/select.h"
-#endif
 #ifdef USE_BUTTON
 #include "esphome/components/button/button.h"
-#endif
-#ifdef USE_SWITCH
-#include "esphome/components/switch/switch.h"
 #endif
 
 namespace esphome::bax {
