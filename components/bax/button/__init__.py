@@ -2,13 +2,9 @@ import esphome.codegen as cg
 from esphome.components import button
 import esphome.config_validation as cv
 from esphome.const import (
-    CONF_FACTORY_RESET,
-    CONF_RESTART,
     DEVICE_CLASS_RESTART,
     ENTITY_CATEGORY_CONFIG,
-    ENTITY_CATEGORY_DIAGNOSTIC,
     ICON_RESTART,
-    ICON_RESTART_ALERT,
 )
 
 from .. import CONF_BAX_ID, BAXComponent, bax_ns
@@ -25,7 +21,7 @@ CONFIG_SCHEMA = {
         ZeroPointCalibrateButton,
         device_class=DEVICE_CLASS_RESTART,
         entity_category=ENTITY_CATEGORY_CONFIG,
-        icon=ICON_RESTART_ALERT,
+        icon=ICON_RESTART,
     ),
 
 }

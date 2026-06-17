@@ -2,10 +2,9 @@ import esphome.codegen as cg
 from esphome.components import sensor
 import esphome.config_validation as cv
 from esphome.const import (
-    CONF_ID,
-    ICON_ACCOUNT,
-    CONF_X, CONF_Y, STATE_CLASS_MEASUREMENT, UNIT_PERCENT, CONF_EC, CONF_TEMPERATURE,
-    ICON_HEART_PULSE, UNIT_PARTS_PER_MILLION, UNIT_MICROSIEMENS_PER_CENTIMETER, DEVICE_CLASS_TEMPERATURE, UNIT_CELSIUS
+    STATE_CLASS_MEASUREMENT, UNIT_PERCENT, CONF_EC, CONF_TEMPERATURE,
+    UNIT_PARTS_PER_MILLION, UNIT_MICROSIEMENS_PER_CENTIMETER, DEVICE_CLASS_TEMPERATURE, UNIT_CELSIUS,
+    ICON_WATER_PERCENT, ICON_CURRENT_AC, ICON_CHEMICAL_WEAPON, ICON_SCALE, ICON_FLASK,
 )
 
 from . import CONF_BAX_ID, BAXComponent, CONF_SALINITY
@@ -21,43 +20,43 @@ CONFIG_SCHEMA = cv.All(
         {
             cv.GenerateID(CONF_BAX_ID): cv.use_id(BAXComponent),
             cv.Optional(CONF_TDS): sensor.sensor_schema(
-                icon=ICON_ACCOUNT,
+                icon=ICON_WATER_PERCENT,
                 unit_of_measurement=UNIT_PARTS_PER_MILLION,
                 accuracy_decimals=0,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(f"{CONF_TDS}2"): sensor.sensor_schema(
-                icon=ICON_ACCOUNT,
+                icon=ICON_WATER_PERCENT,
                 unit_of_measurement=UNIT_PARTS_PER_MILLION,
                 accuracy_decimals=0,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(f"{CONF_TDS}3"): sensor.sensor_schema(
-                icon=ICON_ACCOUNT,
+                icon=ICON_WATER_PERCENT,
                 unit_of_measurement=UNIT_PARTS_PER_MILLION,
                 accuracy_decimals=0,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(CONF_EC): sensor.sensor_schema(
-                icon=ICON_ACCOUNT,
+                icon=ICON_CURRENT_AC,
                 unit_of_measurement=UNIT_MICROSIEMENS_PER_CENTIMETER,
                 accuracy_decimals=0,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(f"{CONF_EC}2"): sensor.sensor_schema(
-                icon=ICON_ACCOUNT,
+                icon=ICON_CURRENT_AC,
                 unit_of_measurement=UNIT_MICROSIEMENS_PER_CENTIMETER,
                 accuracy_decimals=0,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(CONF_SALINITY): sensor.sensor_schema(
-                icon=ICON_ACCOUNT,
+                icon=ICON_CHEMICAL_WEAPON,
                 unit_of_measurement=UNIT_PERCENT,
                 accuracy_decimals=2,
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(CONF_SPECIFIC_GRAVITY): sensor.sensor_schema(  # 比重
-                icon=ICON_ACCOUNT,
+                icon=ICON_SCALE,
                 unit_of_measurement="#",
                 accuracy_decimals=4,
                 state_class=STATE_CLASS_MEASUREMENT,
@@ -81,7 +80,7 @@ CONFIG_SCHEMA = cv.All(
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Optional(CONF_HARDNESS): sensor.sensor_schema( # 硬度
-                icon=ICON_ACCOUNT,
+                icon=ICON_FLASK,
                 unit_of_measurement=UNIT_PARTS_PER_MILLION,
                 accuracy_decimals=0,
                 state_class=STATE_CLASS_MEASUREMENT,

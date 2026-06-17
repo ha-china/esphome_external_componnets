@@ -9,12 +9,29 @@ static const uint8_t BA234_DETECT_CMD[6] = {0xA0, 0x00, 0x00, 0x00, 0x00, 0xA0};
 static const uint8_t BA234_ZERO_POINT_CALIBRATE_CMD[6] = {0xA1, 0x00, 0x00, 0x00, 0x00, 0xA1};  // ba234
 static const uint8_t BA121_BASELINE_CALIBRATE_CMD[6] = {0xA6, 0x00, 0x00, 0x00, 0x00, 0xA6};    // ba121 ba111 ba012 ba022 bat2u
 
-uint8_t bax_crc8(const uint8_t *dat, uint8_t size) {
+// 累加和校验：前 size 个字节相加取低 8 位。用于 ba234/ba121/ba111/ba012/ba022/bat2u/bat3u。
+uint8_t bax_checksum(const uint8_t *dat, uint8_t size) {
   uint8_t sum = 0;
   for (uint8_t i = 0; i < size; i++) {
     sum += dat[i];
   }
   return sum;
+}
+
+// CRC-8 校验（SMBUS，多项式 0x07，初值 0x00，无反射）。仅 ba311 使用。
+uint8_t bax_crc8(const uint8_t *dat, uint8_t size) {
+  uint8_t crc = 0;
+  for (uint8_t i = 0; i < size; i++) {
+    crc ^= dat[i];
+    for (uint8_t j = 0; j < 8; j++) {
+      if (crc & 0x80) {
+        crc = (uint8_t)((crc << 1) ^ 0x07);
+      } else {
+        crc = (uint8_t)(crc << 1);
+      }
+    }
+  }
+  return crc;
 }
 
 void BAXComponent::dump_config() {
@@ -138,7 +155,7 @@ void BAXComponent::twice_calibrate(float sal) {
       // 4%浓度就输入4.0 以此类推
       uint16_t s = sal * 100;
       uint8_t cmd[6] = {0xA7, (uint8_t) ((s >> 8) & 0xFF), (uint8_t) (s & 0xFF), 0x00, 0x00, 0x00};
-      uint8_t crc = bax_crc8(cmd, 5);
+      uint8_t crc = bax_checksum(cmd, 5);
       cmd[5] = crc;
       this->write_array(cmd, 6);
       break;
@@ -159,7 +176,7 @@ void BAXComponent::set_ntc_resistance(uint32_t resistance) {
                          (uint8_t) ((resistance >> 8) & 0xFF),
                          (uint8_t) (resistance & 0xFF),
                          0x00};
-      uint8_t crc = bax_crc8(data, 5);
+      uint8_t crc = bax_checksum(data, 5);
       data[5] = crc;
       this->write_array(data, 6);
       break;
@@ -171,7 +188,7 @@ void BAXComponent::set_ntc_resistance(uint32_t resistance) {
                          (uint8_t) ((resistance >> 8) & 0xFF),
                          (uint8_t) (resistance & 0xFF),
                          0x00};
-      uint8_t crc = bax_crc8(data, 5);
+      uint8_t crc = bax_checksum(data, 5);
       data[5] = crc;
       this->write_array(data, 6);
       break;
@@ -183,7 +200,7 @@ void BAXComponent::set_ntc_resistance(uint32_t resistance) {
                          (uint8_t) ((resistance >> 8) & 0xFF),
                          (uint8_t) (resistance & 0xFF),
                          0x00};
-      uint8_t crc = bax_crc8(data, 5);
+      uint8_t crc = bax_checksum(data, 5);
       data[5] = crc;
       this->write_array(data, 6);
       break;
@@ -195,7 +212,7 @@ void BAXComponent::set_ntc_resistance(uint32_t resistance) {
                          (uint8_t) ((resistance >> 8) & 0xFF),
                          (uint8_t) (resistance & 0xFF),
                          0x00};
-      uint8_t crc = bax_crc8(data, 5);
+      uint8_t crc = bax_checksum(data, 5);
       data[5] = crc;
       this->write_array(data, 6);
       break;
@@ -211,7 +228,7 @@ void BAXComponent::set_ntc_resistance(uint32_t resistance) {
                          (uint8_t) ((resistance >> 8) & 0xFF),
                          (uint8_t) (resistance & 0xFF),
                          0x00};
-      uint8_t crc = bax_crc8(data, 5);
+      uint8_t crc = bax_checksum(data, 5);
       data[5] = crc;
       this->write_array(data, 6);
       break;
@@ -228,7 +245,7 @@ void BAXComponent::set_ntc_b_value(uint16_t b_value) {
                          0x00,
                          0x00,
                          0x00};
-      uint8_t crc = bax_crc8(data, 5);
+      uint8_t crc = bax_checksum(data, 5);
       data[5] = crc;
       this->write_array(data, 6);
       break;
@@ -240,7 +257,7 @@ void BAXComponent::set_ntc_b_value(uint16_t b_value) {
                          0x00,
                          0x00,
                          0x00};
-      uint8_t crc = bax_crc8(data, 5);
+      uint8_t crc = bax_checksum(data, 5);
       data[5] = crc;
       this->write_array(data, 6);
       break;
@@ -252,7 +269,7 @@ void BAXComponent::set_ntc_b_value(uint16_t b_value) {
                          0x00,
                          0x00,
                          0x00};
-      uint8_t crc = bax_crc8(data, 5);
+      uint8_t crc = bax_checksum(data, 5);
       data[5] = crc;
       this->write_array(data, 6);
       break;
@@ -264,7 +281,7 @@ void BAXComponent::set_ntc_b_value(uint16_t b_value) {
                          0x00,
                          0x00,
                          0x00};
-      uint8_t crc = bax_crc8(data, 5);
+      uint8_t crc = bax_checksum(data, 5);
       data[5] = crc;
       this->write_array(data, 6);
       break;
@@ -280,7 +297,7 @@ void BAXComponent::set_ntc_b_value(uint16_t b_value) {
                          0x00,
                          0x00,
                          0x00};
-      uint8_t crc = bax_crc8(data, 5);
+      uint8_t crc = bax_checksum(data, 5);
       data[5] = crc;
       this->write_array(data, 6);
       break;
@@ -304,7 +321,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -325,7 +342,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -346,7 +363,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -366,7 +383,9 @@ void BAXComponent::loop() {
         this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 6);  // remove the processed frame
         return;
       }
-      break;
+      // 未知帧头:丢弃首字节,尝试重新同步
+      this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 1);
+      return;
     }
     case BAX_TYPE::BA022: {
       if (this->buffer_[0] == 0xAA) {
@@ -374,7 +393,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -395,7 +414,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -416,7 +435,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -436,7 +455,9 @@ void BAXComponent::loop() {
         this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 6);  // remove the processed frame
         return;
       }
-      break;
+      // 未知帧头:丢弃首字节,尝试重新同步
+      this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 1);
+      return;
     }
     case BAX_TYPE::BA111: {
       if (this->buffer_[0] == 0xAA) {
@@ -444,7 +465,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -465,7 +486,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -485,7 +506,9 @@ void BAXComponent::loop() {
         this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 6);  // remove the processed frame
         return;
       }
-      break;
+      // 未知帧头:丢弃首字节,尝试重新同步
+      this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 1);
+      return;
     }
     case BAX_TYPE::BA121: {
       if (this->buffer_[0] == 0xAA) {
@@ -493,7 +516,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -514,7 +537,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -534,7 +557,9 @@ void BAXComponent::loop() {
         this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 6);  // remove the processed frame
         return;
       }
-      break;
+      // 未知帧头:丢弃首字节,尝试重新同步
+      this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 1);
+      return;
     }
     case BAX_TYPE::BA234: {
       if (this->buffer_[0] == 0xAA) {
@@ -542,7 +567,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 16) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 15);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 15);
         if (this->buffer_[15] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[15]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -581,7 +606,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -600,7 +625,8 @@ void BAXComponent::loop() {
         return;
       } else {
         ESP_LOGW(TAG, "unknown frame header for ba234: %02X", this->buffer_[0]);
-        this->buffer_.clear();
+        // 丢弃首字节,尝试重新同步
+        this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 1);
         return;
       }
       break;
@@ -611,13 +637,14 @@ void BAXComponent::loop() {
       }
       if (this->buffer_[0] != 0xAA) {
         ESP_LOGW(TAG, "wrong header: expected %02X, got %02X", 0xAA, this->buffer_[0]);
-        this->buffer_.clear();
+        // 丢弃首字节,尝试重新同步
+        this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 1);
         return;
       }
       uint8_t crc = bax_crc8(this->buffer_.data(), 5);
       if (this->buffer_[5] != crc) {
         ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
-        this->buffer_.clear();
+        this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 1);  // 丢弃首字节,尝试重新同步
         return;
       }
       uint16_t tds = (((uint16_t) this->buffer_[1]) << 8) | ((uint16_t) this->buffer_[2]);
@@ -633,7 +660,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 14) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 13);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 13);
         if (this->buffer_[13] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[13]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -673,7 +700,7 @@ void BAXComponent::loop() {
         if (this->buffer_.size() < 6) {
           return;  // not full frame
         }
-        uint8_t crc = bax_crc8(this->buffer_.data(), 5);
+        uint8_t crc = bax_checksum(this->buffer_.data(), 5);
         if (this->buffer_[5] != crc) {
           ESP_LOGW(TAG, "CRC mismatch: expected %02X, got %02X", crc, this->buffer_[5]);
           this->buffer_.clear();  // discard the first byte and try again
@@ -693,7 +720,9 @@ void BAXComponent::loop() {
         this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 6);  // remove the processed frame
         return;
       }
-      break;
+      // 未知帧头:丢弃首字节,尝试重新同步
+      this->buffer_.erase(this->buffer_.begin(), this->buffer_.begin() + 1);
+      return;
     }
     default:
       break;
