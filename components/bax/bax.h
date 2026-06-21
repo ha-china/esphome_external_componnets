@@ -16,7 +16,7 @@ namespace esphome::bax {
 
 enum class BAX_TYPE : uint8_t {
   // BA01, // same as BA012
-  BA012,
+  BA012, // same as BA112
   BA022,
   BA111,
   BA121,
