@@ -36,7 +36,7 @@ CONFIG_SCHEMA = cv.All(
             cv.Optional(CONF_MODE, default="Side"): cv.string,
             cv.Optional(CONF_DETECT_DISTANCE, default=6): cv.positive_float,
             cv.Optional(CONF_DETECT_START_ANGLE, default=-45): cv.float_,
-            cv.Optional(CONF_DETECT_END_ANGLE, default=-45): cv.float_,
+            cv.Optional(CONF_DETECT_END_ANGLE, default=45): cv.float_,
             cv.Optional(CONF_SENSITIVITY, default="High"): cv.string,
             cv.Optional(CONF_ON_DATA): automation.validate_automation(
                 {
